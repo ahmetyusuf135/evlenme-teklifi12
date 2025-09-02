@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Teklif</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin-top: 100px;
+      background-color: #fce4ec;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 36px;
+      color: #d81b60;
+      margin-bottom: 50px;
+    }
+    button {
+      padding: 15px 30px;
+      margin: 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      position: absolute;
+      transition: transform 0.2s ease;
+    }
+    .yes { background-color: #4caf50; color: white; left: 40%; top: 200px; }
+    .no { background-color: #f44336; color: white; left: 55%; top: 200px; }
+    #message {
+      margin-top: 50px;
+      font-size: 24px;
+      color: #d81b60;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <h1>Benimle evlenir misin?</h1>
+  <button class="yes" id="yesBtn">Evet</button>
+  <button class="no" id="noBtn">Hayır</button>
+  <div id="message"></div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const message = document.getElementById('message');
+
+    const messages = [
+      "Evete baş çabuk!",
+      "Hala mı uğraşıyorsun?",
+      "Bu oyunu kazanamazsın",
+      "O buton hep kaçacak",
+      "Bence kader evet diyor",
+      "Kaçırma şansını",
+      "Hala mı uğrasıyorsun",
+      "Bence kader evet diyor",
+      "Kaçırma şansını",
+      "Bence uğraşma evet bas"
+    ];
+
+    let attempt = 0;
+
+    function moveButton() {
+      if(attempt < messages.length){
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100) + 50;
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+        noBtn.style.transform = rotate(${Math.random()*40-20}deg) scale(1.2); // hafif döndür ve büyüt
+        setTimeout(() => { noBtn.style.transform = 'rotate(0deg) scale(1)'; }, 300); // normal pozisyona dön
+        message.textContent = messages[attempt];
+        attempt++;
+      } else {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100) + 50;
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+      }
+    }
+
+    noBtn.addEventListener('mouseover', moveButton);
+    noBtn.addEventListener('click', moveButton);
+
+    yesBtn.addEventListener('click', () => {
+      const today = new Date();
+      const dateStr = today.toLocaleDateString();
+      message.innerHTML = Seni çok seviyorum, iyi ki benimlesin sevgilim 💍<br>Bugünün tarihi: ${dateStr};
+    });
+  </script>
+</body>
+</html>
